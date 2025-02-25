@@ -24,4 +24,4 @@ ENV SQLITE_DB_LOCATION=/etc/todos/todo.db
 RUN mkdir -p /etc/todos
 
 # Default command to run the server
-CMD ["node", "app.js"]
+CMD ["node src/index.js"]
