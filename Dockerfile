@@ -2,7 +2,7 @@
 FROM node:18
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /TODOAPP
 
 # Copy package.json and package-lock.json to leverage Docker caching
 COPY package.json package-lock.json ./
@@ -23,5 +23,5 @@ ENV SQLITE_DB_LOCATION=/etc/todos/todo.db
 # Ensure database migrations run before starting
 RUN mkdir -p /etc/todos
 
-# Default command to run the server
-CMD ["node src/index.js"]
+# Default command to run the app
+CMD ["node", "src/index.js"]
