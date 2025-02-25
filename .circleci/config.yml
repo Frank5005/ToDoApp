@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: node:18
+      - image: circleci/node:18
     steps:
       - checkout
       - run:
@@ -15,7 +15,7 @@ jobs:
 
   build:
     docker:
-      - image: node:18
+      - image: circleci/node:18
     steps:
       - checkout
       - run:
@@ -24,7 +24,7 @@ jobs:
 
   publish:
     docker:
-      - image: node:18
+      - image: circleci/node:18
     steps:
       - checkout
       - setup_remote_docker
@@ -41,7 +41,7 @@ workflows:
   version: 2
   build:
     jobs:
-      #- test
+      - test
       - build
       - publish:
           requires:
