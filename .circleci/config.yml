@@ -44,8 +44,6 @@ jobs:
       - run:
           name: Push Docker Image
           command: docker push frank5005/todo-app:latest
-            #docker tag todo-app $DOCKERHUB_USERNAME/todo-app:latest
-            #docker push $DOCKERHUB_USERNAME/todo-app:latest
 
 workflows:
   version: 2
