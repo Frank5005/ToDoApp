@@ -87,7 +87,12 @@ async function updateItem(id, item) {
             [item.name, item.completed ? 1 : 0, id],
             err => {
                 if (err) return rej(err);
-                acc();
+
+                if (this.changes === 0) {
+                    return acc(null); // ✅ If no record was updated, return null
+                }
+
+                acc({ id, ...item }); // ✅ Return updated item
             },
         );
     });

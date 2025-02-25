@@ -9,9 +9,9 @@ jobs:
       - run:
           name: Install Dependencies
           command: npm install
-      #- run:
-          #name: Run Tests
-          #command: npm test
+      - run:
+          name: Install SQLite
+          command: apt-get update && apt-get install -y sqlite3
 
   build:
     docker:
@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Build Docker Image
-          command: docker build -t todo-app .
+          command: docker build -t frank5005/to-do-app:latest .
 
   publish:
     docker:
@@ -33,9 +33,9 @@ jobs:
           command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
           name: Push Docker Image
-          command: |
-            docker tag todo-app $DOCKERHUB_USERNAME/todo-app:latest
-            docker push $DOCKERHUB_USERNAME/todo-app:latest
+          command: docker push frank5005/todo-app:latest
+            #docker tag todo-app $DOCKERHUB_USERNAME/todo-app:latest
+            #docker push $DOCKERHUB_USERNAME/todo-app:latest
 
 workflows:
   version: 2
