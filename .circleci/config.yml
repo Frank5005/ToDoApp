@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Tag and Push Docker Image
           command: |
-            docker tag frank5005/todo-app:latest frank5005/to-do-app:$CIRCLE_SHA1
+            docker tag frank5005/to-do-app:latest frank5005/to-do-app:$CIRCLE_SHA1
             docker push frank5005/to-do-app:$CIRCLE_SHA1
             docker push frank5005/to-do-app:latest
 
