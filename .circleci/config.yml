@@ -41,6 +41,13 @@ jobs:
       - run:
           name: Build Docker Image
           command: docker build -t frank5005/to-do-app:latest .
+      - run:
+          name: Save Docker Image  # ✅ Save the image so it can be used in publish job
+          command: docker save -o to-do-app.tar frank5005/to-do-app:latest
+      - persist_to_workspace:  # ✅ Store the saved image for the next job
+          root: .
+          paths:
+            - to-do-app.tar
 
   publish:
     docker:
@@ -53,14 +60,11 @@ jobs:
       - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
-      #- run:
-          #name: Debug Environment Variables
-          #command:  |
-            #echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
-            #if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "DOCKERHUB_PASSWORD is NOT set"; else echo "DOCKERHUB_PASSWORD is set"; fi
-      #- run:
-          #name: Login to DockerHub
-          #command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
+      - attach_workspace:  # ✅ Attach workspace to retrieve the saved image
+          at: .
+      - run:
+          name: Load Docker Image  # ✅ Load the image before tagging and pushing
+          command: docker load -i to-do-app.tar
       - run:
           name: Tag and Push Docker Image
           command: |
