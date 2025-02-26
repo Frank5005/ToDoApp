@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Debug Environment Variables
+          command: echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
+      - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
       - run:
