@@ -58,6 +58,9 @@ jobs:
           #version: 20.10.7
           docker_authentication: true
       - run:
+          name: Check Docker Login Status
+          command: docker info | grep -i "username"
+      - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
       - attach_workspace:  # ✅ Attach workspace to retrieve the saved image
@@ -65,9 +68,9 @@ jobs:
       - run:
           name: Load Docker Image  # ✅ Load the image before tagging and pushing
           command: docker load -i to-do-app.tar
-      - run:
-          name: Login to DockerHub
-          command: docker login 
+      #- run:
+          #name: Login to DockerHub
+          #command: docker login 
       - run:
           name: Tag and Push Docker Image
           command: |
