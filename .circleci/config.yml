@@ -5,7 +5,9 @@ jobs:
     docker:
       - image: docker:20.10.7-dind
     steps:
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.7
+          docker_authentication: true
       - checkout
       - run:
           name: Debug Environment Variables
@@ -30,7 +32,9 @@ jobs:
       - image: docker:20.10.7-dind
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.7
+          docker_authentication: true
       - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
@@ -43,18 +47,20 @@ jobs:
       - image: docker:20.10.7-dind
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 20.10.7
+          docker_authentication: true
       - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
-      - run:
-          name: Debug Environment Variables
-          command:  |
-            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
-            if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "DOCKERHUB_PASSWORD is NOT set"; else echo "DOCKERHUB_PASSWORD is set"; fi
-      - run:
-          name: Login to DockerHub
-          command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
+      #- run:
+          #name: Debug Environment Variables
+          #command:  |
+            #echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
+            #if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "DOCKERHUB_PASSWORD is NOT set"; else echo "DOCKERHUB_PASSWORD is set"; fi
+      #- run:
+          #name: Login to DockerHub
+          #command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
       - run:
           name: Push Docker Image
           command: |
