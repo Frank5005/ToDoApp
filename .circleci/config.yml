@@ -59,7 +59,7 @@ jobs:
           docker_authentication: true
       - run:
           name: Check Docker Login Status
-          command: docker info | grep -i "username"
+          command: docker info | grep -i "frank5005"
       - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
