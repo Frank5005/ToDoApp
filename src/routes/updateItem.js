@@ -9,6 +9,9 @@ module.exports = async (req, res) => {
     if (!updatedItem) {
         return res.status(404).json({ error: "Item not found" }); // ✅ Handle missing items
     }
+    else{
+        return res.status(200).json(updatedItem);
+    }
 
-    res.status(200).json(updatedItem); // ✅ Ensure JSON response
+    //res.status(200).json(updatedItem); // ✅ Ensure JSON response
 };
