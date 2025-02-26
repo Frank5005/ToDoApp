@@ -54,7 +54,7 @@ jobs:
             if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "DOCKERHUB_PASSWORD is NOT set"; else echo "DOCKERHUB_PASSWORD is set"; fi
       - run:
           name: Login to DockerHub
-          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+          command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
       - run:
           name: Push Docker Image
           command: |
