@@ -40,7 +40,7 @@ jobs:
           command: apk add --no-cache nodejs npm
       - run:
           name: Build Docker Image
-          command: docker build -t frank5005/todo-app:latest .
+          command: docker build -t frank5005/to-do-app:latest .
 
   publish:
     docker:
@@ -62,11 +62,11 @@ jobs:
           #name: Login to DockerHub
           #command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
       - run:
-          name: Push Docker Image
-          command: docker push frank5005/todo-app:latest
-            #docker tag frank5005/to-do-app:latest frank5005/to-do-app:$CIRCLE_SHA1
-            #docker push frank5005/to-do-app:$CIRCLE_SHA1
-            #docker push frank5005/to-do-app:latest
+          name: Tag and Push Docker Image
+          command: |
+            docker tag frank5005/todo-app:latest frank5005/to-do-app:$CIRCLE_SHA1
+            docker push frank5005/to-do-app:$CIRCLE_SHA1
+            docker push frank5005/to-do-app:latest
 
 workflows:
   version: 2
