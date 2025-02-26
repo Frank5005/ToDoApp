@@ -58,6 +58,9 @@ jobs:
           #version: 20.10.7
           docker_authentication: true
       - run:
+          name: Login to DockerHub
+          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run:
           name: Check Docker Login Status
           command: docker info | grep -i "Username"
       - run:
