@@ -1,17 +1,14 @@
 const db = require('../persistence');
 
 module.exports = async (req, res) => {
-    await db.updateItem(req.params.id, {
-        name: req.body.name,
-        completed: req.body.completed,
-    });
-    const item = await db.getItem(req.params.id);
+    const { id } = req.params;
+    const { name, completed } = req.body;
 
-    /*
-    if (!item) {
-        return res.status(404).json({ error: "Item not found after update" });
+    const updatedItem = await db.updateItem(id, { name, completed });
+
+    if (!updatedItem) {
+        return res.status(404).json({ error: "Item not found" }); // ✅ Handle missing items
     }
-    */
 
-    res.send(item);
+    res.status(200).json(updatedItem); // ✅ Ensure JSON response
 };
