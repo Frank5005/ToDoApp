@@ -8,7 +8,9 @@ jobs:
       - checkout
       - run:
           name: Debug Environment Variables
-          command: echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
+          command:  |
+            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
+            echo "DOCKERHUB_PASSWORD is set: " $(if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "NO"; else echo "YES"; fi)
       - run:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
