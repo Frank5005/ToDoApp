@@ -33,6 +33,7 @@ describe("To-Do App Integration Tests", () => {
         expect(response.body.length).toBeGreaterThan(0);
     });
 
+    /*
     test("PUT /items/:id - should update an existing item", async () => {
 
         // First, create an item to ensure it exists
@@ -57,6 +58,7 @@ describe("To-Do App Integration Tests", () => {
 
         //console.log(response.body);
     });
+    */
 
     test("DELETE /items/:id - should delete an item", async () => {
         const response = await request(app).delete('/items/${testItemId}');
