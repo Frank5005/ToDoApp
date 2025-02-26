@@ -6,7 +6,7 @@ jobs:
       - image: docker:20.10.7-dind
     steps:
       - setup_remote_docker:
-          version: 20.10.7
+          #version: 20.10.7
           docker_authentication: true
       - checkout
       - run:
@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.7
+          #version: 20.10.7
           docker_authentication: true
       - run:
           name: Install Node.js
@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.7
+          #version: 20.10.7
           docker_authentication: true
       - run:
           name: Install Node.js
