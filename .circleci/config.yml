@@ -65,9 +65,9 @@ jobs:
       - run:
           name: Load Docker Image  # ✅ Load the image before tagging and pushing
           command: docker load -i to-do-app.tar
-      - run:
-          name: Login to DockerHub
-          command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      #- run:
+          #name: Login to DockerHub
+          #command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
           name: Tag and Push Docker Image
           command: |
