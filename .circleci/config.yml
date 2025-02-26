@@ -63,10 +63,10 @@ jobs:
           #command: docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
       - run:
           name: Push Docker Image
-          command: |
-            docker tag frank5005/to-do-app:latest frank5005/to-do-app:$CIRCLE_SHA1
-            docker push frank5005/to-do-app:$CIRCLE_SHA1
-            docker push frank5005/to-do-app:latest
+          command: docker push frank5005/to-do-app:latest
+            #docker tag frank5005/to-do-app:latest frank5005/to-do-app:$CIRCLE_SHA1
+            #docker push frank5005/to-do-app:$CIRCLE_SHA1
+            #docker push frank5005/to-do-app:latest
 
 workflows:
   version: 2
