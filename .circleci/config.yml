@@ -48,6 +48,11 @@ jobs:
           name: Install Node.js
           command: apk add --no-cache nodejs npm
       - run:
+          name: Debug Environment Variables
+          command:  |
+            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"
+            if [ -z "$DOCKERHUB_PASSWORD" ]; then echo "DOCKERHUB_PASSWORD is NOT set"; else echo "DOCKERHUB_PASSWORD is set"; fi
+      - run:
           name: Login to DockerHub
           command: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
