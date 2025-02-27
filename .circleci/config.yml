@@ -79,7 +79,7 @@ jobs:
       - run:
           name: SSH into Vagrant Machine and Deploy App
           command: |
-            ssh -tt -o StrictHostKeyChecking=no -p 2200 vagrant@10.0.2.15 \<<EOF
+            ssh -tt -o StrictHostKeyChecking=no -p 2200 vagrant@192.168.56.1 \<<EOF
               sudo docker pull frank5005/to-do-app:latest
               sudo docker stop todo-app || true
               sudo docker rm todo-app || true
