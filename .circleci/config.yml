@@ -70,9 +70,9 @@ jobs:
             docker push frank5005/to-do-app:latest 
   
   deploy:
-    machine:
-      image: ubuntu-2204:2023.07.1
+    machine: true
     steps:
+      - checkout
       - add_ssh_keys:
           fingerprints:
             - "SHA256:WkvqjnyPAeC0cbPErYiGP9vqHdgL1MqqvPdIe3lvHgI"
