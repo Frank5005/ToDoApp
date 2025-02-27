@@ -75,7 +75,6 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:WkvqjnyPAeC0cbPErYiGP9vqHdgL1MqqvPdIe3lvHgI"
             - "SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA"
       - run:
           name: SSH into Vagrant Machine and Deploy App
