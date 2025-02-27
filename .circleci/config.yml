@@ -77,9 +77,6 @@ jobs:
           fingerprints:
             - "SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA"
       - run:
-          name: Start Vagrant Machine  # ✅ Ensure the Vagrant machine is running
-          command: vagrant up
-      - run:
           name: SSH into Vagrant Machine and Deploy App
           command: |
             ssh -tt -o StrictHostKeyChecking=no -p 2200 vagrant@127.0.0.1 \<<EOF
