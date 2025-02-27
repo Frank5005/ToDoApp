@@ -75,11 +75,11 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA"
+            - "SHA256:wxt09jon56RQ2tZiYA3WAkYPtc2nDIU9nSpIL3/rqTM"
       - run:
           name: SSH into Vagrant Machine and Deploy App
           command: |
-            ssh -tt -o StrictHostKeyChecking=no -p 2200 vagrant@192.168.56.11 \<<EOF
+            ssh -tt -o StrictHostKeyChecking=no -p 2200 vagrant@127.0.0.1 \<<EOF
               sudo docker pull frank5005/to-do-app:latest
               sudo docker stop todo-app || true
               sudo docker rm todo-app || true
@@ -90,11 +90,4 @@ workflows:
   version: 2
   deploy:
     jobs:
-      #- test
-      #- build
-      #- publish:
-          #requires:
-            #- build
-      - deploy:
-          #requires:
-            #- publish
+      - deploy
