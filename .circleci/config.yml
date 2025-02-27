@@ -68,14 +68,34 @@ jobs:
             docker tag frank5005/to-do-app:latest frank5005/to-do-app:$CIRCLE_SHA1
             docker push frank5005/to-do-app:$CIRCLE_SHA1
             docker push frank5005/to-do-app:latest 
-          #docker push frank5005/to-do-app:$CIRCLE_SHA1
+  
+  deploy:
+    machine:
+      image: ubuntu-2204:2023.07.1
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:WkvqjnyPAeC0cbPErYiGP9vqHdgL1MqqvPdIe3lvHgI"
+            - "SHA256:1M4RzhMyWuFS/86uPY/ce2prh/dVTHW7iD2RhpquOZA"
+      - run:
+          name: SSH into Vagrant Machine and Deploy App
+          command: |
+            ssh -o StrictHostKeyChecking=no vagrant@127.0.0.1 <<EOF
+              sudo docker pull frank5005/to-do-app:latest
+              sudo docker stop todo-app || true
+              sudo docker rm todo-app || true
+              sudo docker run -d -p 3000:3000 --name todo-app frank5005/to-do-app:latest
+            EOF
 
 workflows:
   version: 2
-  build:
+  build_publish_deploy:
     jobs:
       - test
       - build
       - publish:
           requires:
             - build
+      - deploy:
+          requires:
+            - publish
